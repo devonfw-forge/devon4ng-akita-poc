@@ -1,0 +1,19 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+p {
+  white-space: pre-wrap;
+  max-height: 250px;
+  overflow: auto;
+}
+
+.videogame-data {
+  padding: 10px;
+  width: 70%;
+}
+
+.videogame-footer * {
+  margin-left: 10px;
+}

@@ -1,0 +1,31 @@
+:host {
+  height: 100%;
+}
+
+.filters,
+.wrapper {
+  margin-top: 20px;
+}
+
+.actions {
+  font-size: 20px;
+
+  .search {
+    margin-left: 10px;
+    width: 60%;
+  }
+}
+
+.mat-accordion {
+  width: 80%;
+}
+
+@media all and (min-width: 600px) {
+  .mat-accordion {
+    width: 50%;
+  }
+
+  .actions .search {
+    width: 40%;
+  }
+}

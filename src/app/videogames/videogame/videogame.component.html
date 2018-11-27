@@ -1,0 +1,52 @@
+
+<ng-container *ngIf="editMode; else readonlyTpl">
+  <form (ngSubmit)="update(name.value, description.value, cover.value)">
+    <div fxLayout="row" fxLayoutAlign="space-around center"
+       fxLayout.lt-md="column">
+      <div class="videogame-cover">
+        <img [src]="videogame.cover" [alt]="videogame.name">
+      </div>
+      <div class="videogame-data edit-mode" fxLayout="column">
+        <mat-form-field>
+          <input matInput name="name" placeholder="Name" required
+            [value]="videogame.name" #name>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="cover" placeholder="Cover" required
+            [value]="videogame.cover" #cover>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput name="description" placeholder="Description" rows="10" required
+            [value]="videogame.description" #description></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="videogame-footer" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-raised-button (click)="editMode = false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Update</button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #readonlyTpl>
+  <div fxLayout="row" fxLayoutAlign="space-around start" 
+    fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-around center">
+    <div class="videogame-cover">
+      <img [src]="videogame.cover" [alt]="videogame.name">
+    </div>
+    <div class="videogame-data">
+      <ul>
+        <li>
+          <h2>{{ videogame.name }}</h2>
+        </li>
+        <li>
+          <p>{{ videogame.description }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="videogame-footer" fxLayout="row" fxLayoutAlign="end end">
+    <button mat-raised-button (click)="editMode = true">Edit</button>
+    <button mat-raised-button color="warn" (click)="remove(videogame)">Delete</button>
+  </div>
+</ng-template>
