@@ -23,5 +23,5 @@ export let videogames = [
     year: 1987,
     cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Punch-out_mrdream_boxart.PNG/220px-Punch-out_mrdream_boxart.PNG',
     completed: false,
-  }
+  },
 ];

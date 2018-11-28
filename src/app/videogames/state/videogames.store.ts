@@ -7,7 +7,9 @@ export interface VideogamesState extends EntityState<Videogame> {}
 @Injectable({
   providedIn: 'root',
 })
-@StoreConfig({ name: 'videogames' })
+@StoreConfig({
+  name: 'videogames',
+})
 export class VideogamesStore extends EntityStore<VideogamesState, Videogame> {
 
   constructor() {

@@ -5,7 +5,7 @@ export interface Videogame {
   name: string;
   description: string;
   cover: string;
-  year: number;
+  year: number | string;
   completed: boolean;
 }
 
@@ -15,6 +15,7 @@ export function createVideogame(params: Partial<Videogame>) {
     completed: false,
     cover: '/assets/img/no_photo.png',
     description: 'No Description',
+    year: 'N/A',
     ...params,
   } as Videogame;
 }

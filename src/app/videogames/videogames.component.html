@@ -5,22 +5,22 @@
 <ng-container *ngIf="!(loading$ | async); else loadingTpl">
   <div class="actions" fxLayout="column">
     
-    <!-- Search -->
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <mat-icon>search</mat-icon>
-      <mat-form-field class="search">
-        <input matInput placeholder="Search Videogames..."
-          [formControl]="search">
-      </mat-form-field>
-    </div>
-    
     <!-- Add -->
     <div fxLayout="row" fxLayoutAlign="center center">
       <mat-icon>add</mat-icon>
-      <mat-form-field class="search">
-        <input matInput placeholder="Add Videogame..."
+      <mat-form-field class="action">
+        <input matInput placeholder="New Videogame..."
           [formControl]="new"  
           (keydown.enter)="add()">
+      </mat-form-field>
+    </div>
+
+    <!-- Search -->
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon>search</mat-icon>
+      <mat-form-field class="action">
+        <input matInput placeholder="Search Videogames..."
+          [formControl]="search">
       </mat-form-field>
     </div>
   </div>
@@ -32,6 +32,9 @@
           <mat-panel-title>
             {{ videogame.name }}
           </mat-panel-title>
+          <mat-panel-description fxLayout="row" fxLayoutAlign="end center">
+            <span>{{ videogame.year }}</span>
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <app-videogame [videogame]="videogame">
         </app-videogame>

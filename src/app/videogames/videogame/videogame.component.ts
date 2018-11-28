@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Videogame, VideogamesService } from '../state';
 
 @Component({
@@ -7,7 +7,7 @@ import { Videogame, VideogamesService } from '../state';
   styleUrls: ['./videogame.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideogameComponent implements OnInit {
+export class VideogameComponent {
 
   @Input() videogame: Videogame;
 
@@ -15,14 +15,15 @@ export class VideogameComponent implements OnInit {
 
   constructor(private videogamesService: VideogamesService) { }
 
-  ngOnInit() {
-  }
-
   remove({ id }: Videogame): void {
     this.videogamesService.remove(id);
   }
 
-  update(name: string, description: string, cover: string): void {
-    this.videogamesService.update(this.videogame.id, name, description, cover);
+  update(name: string, year: number, description: string, cover: string, completed: boolean): void {
+    this.videogamesService.update(this.videogame.id, name, year, description, cover, completed);
+  }
+
+  markCompleted(completed: boolean): void {
+    this.videogamesService.completed(this.videogame.id, completed);
   }
 }

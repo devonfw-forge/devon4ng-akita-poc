@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
-import { Videogame, VideogamesService, VideogamesQuery } from './state';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { combineLatest, Observable } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
+import { Videogame, VideogamesQuery, VideogamesService } from './state';
 
 @Component({
   selector: 'app-videogames',
@@ -12,19 +12,23 @@ import { startWith, switchMap } from 'rxjs/operators';
 })
 export class VideogamesComponent implements OnInit {
 
-  search = new FormControl();
-
-  new = new FormControl();
-
   videogames$: Observable<Videogame[]>;
 
   loading$: Observable<boolean>;
+
+  search = new FormControl();
+
+  new = new FormControl();
 
   constructor(private videogamesService: VideogamesService,
     private videogamesQuery: VideogamesQuery) { }
 
   ngOnInit() {
-    (<Observable<Videogame[]>>this.videogamesService.get()).subscribe();
+    const getVideogames: Observable<Videogame[]> | void = this.videogamesService.get();
+
+    if (getVideogames) {
+      getVideogames.subscribe();
+    }
 
     this.loading$ = this.videogamesQuery.selectLoading();
     this.videogames$ = combineLatest(
@@ -36,6 +40,10 @@ export class VideogamesComponent implements OnInit {
   }
 
   add(): void {
+    if (!this.new.value) {
+      return;
+    }
+
     this.videogamesService.add(this.new.value);
     this.new.reset();
   }

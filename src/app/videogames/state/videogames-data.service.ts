@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ID } from '@datorama/akita';
 import { Observable, timer } from 'rxjs';
-import { Videogame } from '.';
 import { mapTo } from 'rxjs/operators';
 import { videogames } from '../videogames.mocks';
-import { ID } from '@datorama/akita';
+import { Videogame } from './videogame.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,19 @@ export class VideogamesDataService {
   }
 
   add(videogame: Videogame): Observable<Videogame> {
-    this.videogames.push(<any>videogame);
+    this.videogames.push(videogame);
     return timer(1000).pipe(mapTo(videogame));
   }
 
   remove(id: ID): Observable<boolean> {
-    this.videogames = this.videogames.filter((videogame) => {
+    this.videogames = this.videogames.filter((videogame: Videogame) => {
       return videogame.id !== id;
     });
     return timer(1000).pipe(mapTo(true));
   }
 
   udpdate(videogame: Videogame): Observable<Videogame> {
-    this.videogames = this.videogames.map((vg) => {
+    this.videogames = this.videogames.map((vg: Videogame) => {
       if (vg.id === videogame.id) {
         vg = videogame;
       }

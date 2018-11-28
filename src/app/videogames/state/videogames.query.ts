@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { QueryEntity } from '@datorama/akita';
-import { VideogamesStore, VideogamesState } from './videogames.store';
-import { Videogame } from './videogame.model';
 import { Observable } from 'rxjs';
+import { Videogame } from './videogame.model';
+import { VideogamesState, VideogamesStore } from './videogames.store';
 
 @Injectable({
   providedIn: 'root',

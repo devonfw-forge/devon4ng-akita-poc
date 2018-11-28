@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="editMode; else readonlyTpl">
-  <form (ngSubmit)="update(name.value, description.value, cover.value)">
+  <form (ngSubmit)="update(name.value, year.value, description.value, cover.value, completed.checked)">
     <div fxLayout="row" fxLayoutAlign="space-around center"
        fxLayout.lt-md="column">
       <div class="videogame-cover">
@@ -12,6 +12,10 @@
             [value]="videogame.name" #name>
         </mat-form-field>
         <mat-form-field>
+          <input matInput type="number" name="year" placeholder="Year" required
+            [value]="videogame.year" #year>
+        </mat-form-field>
+        <mat-form-field>
           <input matInput name="cover" placeholder="Cover" required
             [value]="videogame.cover" #cover>
         </mat-form-field>
@@ -19,11 +23,14 @@
           <textarea matInput name="description" placeholder="Description" rows="10" required
             [value]="videogame.description" #description></textarea>
         </mat-form-field>
+        <mat-checkbox [checked]="videogame.completed" #completed>
+          {{ completed.checked ? 'Completed' : 'Not completed' }}
+        </mat-checkbox>
       </div>
     </div>
     <div class="videogame-footer" fxLayout="row" fxLayoutAlign="end end">
       <button mat-raised-button (click)="editMode = false">Cancel</button>
-      <button mat-raised-button color="primary" type="submit">Update</button>
+      <button type="submit" mat-raised-button color="primary">Update</button>
     </div>
   </form>
 </ng-container>
@@ -41,6 +48,11 @@
         </li>
         <li>
           <p>{{ videogame.description }}</p>
+        </li>
+        <li>
+          <mat-checkbox [checked]="videogame.completed" (click)="markCompleted(!videogame.completed)">
+            {{ videogame.completed ? 'Completed' : 'Not completed' }}
+          </mat-checkbox>
         </li>
       </ul>
     </div>

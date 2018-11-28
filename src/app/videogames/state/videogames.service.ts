@@ -26,19 +26,24 @@ export class VideogamesService {
     return this.videogamesQuery.isPristine ? request : noop();
   }
 
-  add(name: string) {
+  add(name: string): void {
     const videogame: Videogame = createVideogame({ name });
     this.videogamesStore.add(videogame);
     this.videogamesDataService.add(videogame).subscribe();
   }
 
-  remove(id: ID) {
+  remove(id: ID): void {
     this.videogamesStore.remove(id);
     this.videogamesDataService.remove(id).subscribe();
   }
 
-  update(id: ID, name: string, description: string, cover: string) {
-    this.videogamesStore.update(id, { name, description, cover });
+  update(id: ID, name: string, year: number, description: string, cover: string, completed: boolean): void {
+    this.videogamesStore.update(id, { name, year, description, cover, completed });
+    this.videogamesDataService.udpdate(this.videogamesQuery.getEntity(id)).subscribe();
+  }
+
+  completed(id: ID, completed: boolean): void {
+    this.videogamesStore.update(id, { completed });
     this.videogamesDataService.udpdate(this.videogamesQuery.getEntity(id)).subscribe();
   }
 }
