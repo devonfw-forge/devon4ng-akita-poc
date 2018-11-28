@@ -27,7 +27,10 @@
 
   <div class="wrapper" fxLayout="column" fxLayoutAlign="center center">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let videogame of (videogames$ | async)">
+      <mat-expansion-panel *ngFor="let videogame of (videogames$ | async)"
+        [expanded]="(getUIState(videogame) | async)?.isOpen"
+        (opened)="toggleOpen(videogame, true)"
+        (closed)="toggleOpen(videogame, false)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{ videogame.name }}

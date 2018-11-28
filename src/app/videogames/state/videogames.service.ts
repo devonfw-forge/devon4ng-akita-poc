@@ -46,4 +46,10 @@ export class VideogamesService {
     this.videogamesStore.update(id, { completed });
     this.videogamesDataService.udpdate(this.videogamesQuery.getEntity(id)).subscribe();
   }
+
+  toggleOpenVideogameState(id: ID, open: boolean): void {
+    this.videogamesStore.uiStore.createOrReplace(id, {
+      isOpen: open,
+    });
+  }
 }

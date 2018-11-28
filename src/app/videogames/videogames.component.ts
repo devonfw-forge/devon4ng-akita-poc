@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Videogame, VideogamesQuery, VideogamesService } from './state';
+import { VideogameUI } from './state/videogames-ui.store';
 
 @Component({
   selector: 'app-videogames',
@@ -46,5 +47,13 @@ export class VideogamesComponent implements OnInit {
 
     this.videogamesService.add(this.new.value);
     this.new.reset();
+  }
+
+  getUIState({ id }: Videogame): Observable<VideogameUI> {
+    return this.videogamesQuery.uiQuery.selectEntity(id);
+  }
+
+  toggleOpen({ id }: Videogame, open: boolean): void {
+    this.videogamesService.toggleOpenVideogameState(id, open);
   }
 }
