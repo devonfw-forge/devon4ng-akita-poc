@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
-import { Videogame, VideogamesQuery, VideogamesService } from './state';
+import { Videogame, VideogamesQuery, VideogamesService, VISIBILITY_FILTER } from './state';
 import { VideogameUI } from './state/videogames-ui.store';
 
 @Component({
@@ -20,6 +20,8 @@ export class VideogamesComponent implements OnInit {
   search = new FormControl();
 
   new = new FormControl();
+
+  completed = new FormControl();
 
   constructor(private videogamesService: VideogamesService,
     private videogamesQuery: VideogamesQuery) { }
@@ -55,5 +57,11 @@ export class VideogamesComponent implements OnInit {
 
   toggleOpen({ id }: Videogame, open: boolean): void {
     this.videogamesService.toggleOpenVideogameState(id, open);
+  }
+
+  filterCompleted(): void {
+    const visibility: VISIBILITY_FILTER = (!this.completed.value) ?
+      VISIBILITY_FILTER.SHOW_COMPLETED : VISIBILITY_FILTER.SHOW_ALL;
+    this.videogamesService.toggleVisibility(visibility);
   }
 }

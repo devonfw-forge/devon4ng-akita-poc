@@ -6,6 +6,7 @@ import { createVideogame, Videogame } from './videogame.model';
 import { VideogamesDataService } from './videogames-data.service';
 import { VideogamesQuery } from './videogames.query';
 import { VideogamesStore } from './videogames.store';
+import { VISIBILITY_FILTER } from './videogames-filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,5 +52,9 @@ export class VideogamesService {
     this.videogamesStore.uiStore.createOrReplace(id, {
       isOpen: open,
     });
+  }
+
+  toggleVisibility(visibility: VISIBILITY_FILTER): void {
+    this.videogamesStore.updateFilter(visibility);
   }
 }

@@ -23,6 +23,15 @@
           [formControl]="search">
       </mat-form-field>
     </div>
+
+    <!-- Filters -->
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <mat-checkbox class="filter"
+        [formControl]="completed"
+        (click)="filterCompleted()">
+        Show only completed
+      </mat-checkbox>
+    </div>
   </div>
 
   <div class="wrapper" fxLayout="column" fxLayoutAlign="center center">
