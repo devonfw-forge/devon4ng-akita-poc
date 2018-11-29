@@ -7,6 +7,7 @@ import { VideogamesDataService } from './videogames-data.service';
 import { VideogamesQuery } from './videogames.query';
 import { VideogamesStore } from './videogames.store';
 import { VISIBILITY_FILTER } from './videogames-filter.model';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,12 @@ export class VideogamesService {
   completed(id: ID, completed: boolean): void {
     this.videogamesStore.update(id, { completed });
     this.videogamesDataService.udpdate(this.videogamesQuery.getEntity(id)).subscribe();
+  }
+
+  changePosition(prevPosition: number, currentPosition: number): void {
+    const videogames: Videogame[] = Object.values(this.videogamesStore.entities);
+    moveItemInArray(videogames, prevPosition, currentPosition);
+    this.videogamesStore.set(videogames);
   }
 
   toggleOpenVideogameState(id: ID, open: boolean): void {

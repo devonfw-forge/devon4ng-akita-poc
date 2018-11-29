@@ -35,8 +35,8 @@
   </div>
 
   <div class="wrapper" fxLayout="column" fxLayoutAlign="center center">
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let videogame of (videogames$ | async)"
+    <mat-accordion cdkDropList  (cdkDropListDropped)="drop($event)">
+      <mat-expansion-panel cdkDrag *ngFor="let videogame of (videogames$ | async)"
         [expanded]="(getUIState(videogame) | async)?.isOpen"
         (opened)="toggleOpen(videogame, true)"
         (closed)="toggleOpen(videogame, false)">

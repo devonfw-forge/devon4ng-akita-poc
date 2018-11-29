@@ -4,6 +4,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Videogame, VideogamesQuery, VideogamesService, VISIBILITY_FILTER } from './state';
 import { VideogameUI } from './state/videogames-ui.store';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-videogames',
@@ -49,6 +50,10 @@ export class VideogamesComponent implements OnInit {
 
     this.videogamesService.add(this.new.value);
     this.new.reset();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.videogamesService.changePosition(event.previousIndex, event.currentIndex);
   }
 
   getUIState({ id }: Videogame): Observable<VideogameUI> {
